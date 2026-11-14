@@ -290,7 +290,7 @@ Agora definimos os dois comportamentos estratégicos centrais que o professor co
 > É o ato deliberado de submeter um lance **estritamente menor do que a sua verdadeira Valoração** ($b_i < v_i$).
 
 Por que o **Sombreamento de Lance** é obrigatório no **Leilão de Primeiro Preço**? Olhe para a **fórmula do Valor Esperado do Ganho (*Payoff* Esperado)** do jogador $i$:
-$$\mathbb{E}[u_i(b_i) \mid v_i] = \underbrace{(v_i - b_i)}\limits_{\text{Lucro se vencer}} \times \underbrace{\mathbb{P}\big(b_i > \max_{j \neq i} b_j\big)}\limits_{\text{Probabilidade de vencer}} + \underbrace{0 \times \mathbb{P}\big(b_i < \max_{j \neq i} b_j\big)}\limits_{\text{Ganho se perder } (=0)}$$
+$$\mathbb{E}[u_i(b_i) \mid v_i] = \underbrace{(v_i - b_i)}_{\text{Lucro se vencer}} \times \underbrace{\mathbb{P}\big(b_i > \max_{j \neq i} b_j\big)}_{\text{Probabilidade de vencer}} + \underbrace{0 \times \mathbb{P}\big(b_i < \max_{j \neq i} b_j\big)}_{\text{Ganho se perder } (=0)}$$
 Veja o que essa fórmula de Valor Esperado revela imediatamente:
 - Se você escrever o seu valor verdadeiro no envelope ($b_i = v_i$), o primeiro termo $(v_i - b_i)$ zera:
   $$\mathbb{E}[u_i(v_i) \mid v_i] = (v_i - v_i) \times \mathbb{P}(\text{vencer}) = 0$$
@@ -396,7 +396,7 @@ Para entender por que a receita do **1º Preço** empata exatamente com a do **2
 1. **O que é *Bid Shading* e por que ele acontece no 1º Preço (pela Fórmula do Valor Esperado)?**  
    *Bid shading* é o desconto estratégico que o comprador aplica sobre o seu próprio valor na hora de dar o lance ($b_i < v_i$).  
    Ele acontece porque, no **Leilão de 1º Preço**, quem vence paga o próprio lance, de modo que o **Valor Esperado do Ganho** do jogador $i$ é o produto:
-   $$\mathbb{E}[u_i(b_i) \mid v_i] = \underbrace{(v_i - b_i)}\limits_{\text{Margem se vencer}} \times \underbrace{\mathbb{P}\big(b_i > \max_{j \neq i} b_j\big)}\limits_{\text{Probabilidade de vencer}}$$
+   $$\mathbb{E}[u_i(b_i) \mid v_i] = \underbrace{(v_i - b_i)}_{\text{Margem se vencer}} \times \underbrace{\mathbb{P}\big(b_i > \max_{j \neq i} b_j\big)}_{\text{Probabilidade de vencer}}$$
    Se o jogador ofertar seu valor cheio ($b_i = v_i$), sua margem $(v_i - b_i)$ zera e seu ganho esperado é $0$. Ao maximizar $\mathbb{E}[u_i(b_i) \mid v_i]$, o lance ótimo de equilíbrio no 1º Preço resulta exatamente no **Valor Esperado do maior valor adversário, dado que ele é menor que** $v_i$:
    $$b_{\text{1º Preço}}^\ast(v_i) = \mathbb{E}\Big[\,\max_{j \neq i} v_j \;\Big|\; \max_{j \neq i} v_j < v_i\,\Big]$$
    Com 2 jogadores e valores uniformes (onde o adversário menor que $v_i$ está distribuído uniformemente entre $0$ e $v_i$), esse valor esperado é exatamente a **metade de** $v_i$:
@@ -416,7 +416,7 @@ Para entender por que a receita do **1º Preço** empata exatamente com a do **2
 
 Para verificar empiricamente essa equivalência, o script [`simulacao_leilao.py`](./simulacao_leilao.py) (detalhado passo a passo na **Seção 8.7**) sorteia $10.000$ leilões independentes com $n = 2$ anunciantes cujas valorações privadas seguem $v_{t,i} \stackrel{\text{i.i.d.}}{\sim} U[0,1]$ e submete cada leilão simultaneamente às duas regras de equilíbrio. A figura abaixo (salva em [`Artigo/Imagens/equivalencia_receita_simulacao.png`](./Artigo/Imagens/equivalencia_receita_simulacao.png)) ilustra lado a lado:
 - **Painel (a):** As retas de lance ótimo no Equilíbrio de Nash Bayesiano para $v_i \sim U[0,1]$: a revelação sincera $b(v) = v$ no **2º Preço (Vickrey)** versus o lance com *bid shading* $b(v) = \frac{n-1}{n}v = \frac{1}{2}v$ no **1º Preço** (destacando em rosa o desconto estratégico de $-50\%$);
-- **Painel (b):** A evolução da **receita média acumulada** pela plataforma ($\mathop{\overline{R}}\nolimits_T = \frac{1}{T}\sum_{t=1}^T R_t$) ao longo dos $10.000$ leilões simulados ($n = 2$), comprovando visualmente que ambos os formatos convergem para o mesmo valor teórico exato $\mathbb{E}[R] = \frac{n-1}{n+1} = \frac{1}{3} \approx 0{,}3333$ ($0{,}3339$ no 1º Preço e $0{,}3323$ no 2º Preço):
+- **Painel (b):** A evolução da **receita média acumulada** pela plataforma ($\overline{R}_T = \frac{1}{T}\sum_{t=1}^T R_t$) ao longo dos $10.000$ leilões simulados ($n = 2$), comprovando visualmente que ambos os formatos convergem para o mesmo valor teórico exato $\mathbb{E}[R] = \frac{n-1}{n+1} = \frac{1}{3} \approx 0{,}3333$ ($0{,}3339$ no 1º Preço e $0{,}3323$ no 2º Preço):
 
 ![Simulação de Monte Carlo — Teorema da Equivalência de Receita](./Artigo/Imagens/equivalencia_receita_simulacao.png)
 
@@ -533,7 +533,7 @@ Agora fechamos a segunda metade do Modelo Resolvido mostrando por que o vendedor
   - A probabilidade de ambas serem menores que $y$ é $F_{\max}(y) = \mathbb{P}(v_1 \le y)\mathbb{P}(v_2 \le y) = y \cdot y = y^2$.
   - A densidade do máximo é a derivada de $y^2$, que é $f_{\max}(y) = 2y$.
   - Logo, a média do máximo é:
-    $$\mathbb{E}[\max\lbrace v_1, v_2\rbrace] = \int_0^1 y \cdot (2y)\,dy = \mathop{\left[\frac{2y^3}{3}\right]}\nolimits_0^1 = \frac{2}{3}$$
+    $$\mathbb{E}[\max\lbrace v_1, v_2\rbrace] = \int_0^1 y \cdot (2y)\,dy = \left[\frac{2y^3}{3}\right]_0^1 = \frac{2}{3}$$
 - Como o vencedor no 1º preço paga **metade** do seu valor:
   $$\boxed{\mathbb{E}[R_{\text{1º}}] = \frac{1}{2} \times \frac{2}{3} = \frac{1}{3}}$$
 
@@ -673,7 +673,7 @@ São os $n$ anunciantes concorrentes (por exemplo: Nike, Adidas, Puma) que dispu
 - **Como o anunciante calcula o seu próprio $v_i$ na prática? (Exemplo numérico):**  
   Suponha que a **Nike** vende um tênis que deixa **R\$ 200,00 de lucro líquido** por par vendido. Pelos dados históricos do site da Nike, a cada 20 pessoas que clicam no anúncio, 1 pessoa efetivamente compra o tênis (ou seja, a probabilidade de o clique virar venda é de $5\%$).  
   Logo, quanto vale **1 clique** em média para a Nike?
-  $$v_{\text{Nike}} = \underbrace{5\%}\limits_{\text{Chance de o clique virar compra}} \times \underbrace{200{,}00}\limits_{\text{Lucro por venda (reais)}} = \mathbf{10{,}00 \text{ reais por clique}}$$
+  $$v_{\text{Nike}} = \underbrace{5\%}_{\text{Chance de o clique virar compra}} \times \underbrace{200{,}00}_{\text{Lucro por venda (reais)}} = \mathbf{10{,}00 \text{ reais por clique}}$$
 - **Por que é um Jogo de Informação Incompleta (Bayesiano)?**
   - **Informação Privada (Tipo $v_i$):** Só a Nike conhece os seus próprios dados internos (sua margem de lucro de R\$ 200 e sua taxa de conversão de 5%); portanto, só a Nike sabe que $v_{\text{Nike}} = 10{,}00$ (R\$ 10,00). A Adidas sabe o seu próprio valor $v_{\text{Adidas}}$, mas não sabe o valor exato da Nike.
   - **Informação de Conhecimento Comum (*Prior* Comum $F$):** Todos os anunciantes conhecem as regras do leilão da plataforma e a distribuição estatística geral de mercado $F(v)$ da qual os valores dos concorrentes daquele setor são sorteados.
@@ -738,7 +738,7 @@ O script simula $N_{\text{leilões}} = 10.000$ leilões sequenciais de um espaç
 
 4. **Etapa 4 — Convergência pela Lei dos Grandes Números (Média Acumulada):**  
    Para cada instante $T \in \lbrace 1, 2, \dots, 10.000\rbrace$, o programa calcula a **receita média acumulada** da plataforma até o $T\text{-ésimo}$ leilão por meio da soma cumulativa vetorizada (`np.cumsum(receita) / indices`):
-   $$\mathop{\overline{R}}\nolimits_T^{(1)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(1)} \qquad \text{e} \qquad \mathop{\overline{R}}\nolimits_T^{(2)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(2)}$$
+   $$\overline{R}_T^{(1)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(1)} \qquad \text{e} \qquad \overline{R}_T^{(2)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(2)}$$
    Pela Lei Forte dos Grandes Números e pelo **Teorema da Equivalência de Receita**, quando $T \to \infty$, ambas as médias acumuladas devem convergir para a mesma esperança matemática teórica:
    $$\mathbb{E}[R] = \frac{n-1}{n+1} = \frac{2-1}{2+1} = \frac{1}{3} \approx 0{,}3333$$
 
@@ -749,11 +749,11 @@ Ao executar o script (tempo de execução $\approx 0{,}02\text{ s}$), obtêm-se 
 | Métrica | Expressão | Valor Obtido |
 | :--- | :--- | :--- |
 | **Receita Teórica Esperada (RET)** | $\mathbb{E}[R] = \dfrac{n-1}{n+1} = \dfrac{1}{3}$ | $0{,}3333$ |
-| **Receita Média Simulada — 1º Preço** | $\mathop{\overline{R}}\nolimits_{10.000}^{(1)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} \max_i b_{t,i}^{(1)}$ | $0{,}3339$ *(erro $< 0{,}0006$)* |
-| **Receita Média Simulada — 2º Preço (Vickrey)** | $\mathop{\overline{R}}\nolimits_{10.000}^{(2)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} b_{t,(n-1)}^{(2)}$ | $0{,}3323$ *(erro $< 0{,}0010$)* |
+| **Receita Média Simulada — 1º Preço** | $\overline{R}_{10.000}^{(1)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} \max_i b_{t,i}^{(1)}$ | $0{,}3339$ *(erro $< 0{,}0006$)* |
+| **Receita Média Simulada — 2º Preço (Vickrey)** | $\overline{R}_{10.000}^{(2)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} b_{t,(n-1)}^{(2)}$ | $0{,}3323$ *(erro $< 0{,}0010$)* |
 
 - **O que mostra o Painel (a) da figura:** Plota as funções de lance ótimo $b(v)$ em função da valoração privada $v_i \in [0,1]$. A reta azul ($b(v) = v$, inclinação $1$) representa o lance sincero no 2º Preço, enquanto a reta tracejada vermelha ($b(v) = \frac{1}{2}v$, inclinação $0{,}5$) representa o lance no 1º Preço. A área sombreada em rosa entre as duas retas destaca visualmente o **desconto estratégico (*Bid Shading* de $-50\%$)** que o anunciante aplica para proteger sua margem de lucro quando o leilão cobra o próprio lance.
-- **O que mostra o Painel (b) da figura:** Plota a evolução das médias acumuladas $\mathop{\overline{R}}\nolimits_T^{(1)}$ (curva vermelha) e $\mathop{\overline{R}}\nolimits_T^{(2)}$ (curva azul) do leilão $1$ até o leilão $10.000$. Observa-se que, embora nos primeiros leilões haja oscilação amostral, a partir de cerca de $1.500$ leilões as duas curvas se sobrepõem sobre a linha horizontal tracejada verde ($\mathbb{E}[R] = 1/3 \approx 0{,}3333$), demonstrando visualmente que o desconto de $50\%$ aplicado sobre o maior valor no 1º Preço compensa exatamente o fato de se cobrar $100\%$ do segundo maior valor no 2º Preço.
+- **O que mostra o Painel (b) da figura:** Plota a evolução das médias acumuladas $\overline{R}_T^{(1)}$ (curva vermelha) e $\overline{R}_T^{(2)}$ (curva azul) do leilão $1$ até o leilão $10.000$. Observa-se que, embora nos primeiros leilões haja oscilação amostral, a partir de cerca de $1.500$ leilões as duas curvas se sobrepõem sobre a linha horizontal tracejada verde ($\mathbb{E}[R] = 1/3 \approx 0{,}3333$), demonstrando visualmente que o desconto de $50\%$ aplicado sobre o maior valor no 1º Preço compensa exatamente o fato de se cobrar $100\%$ do segundo maior valor no 2º Preço.
 
 #### Como Executar o Simulador
 No terminal (na raiz do repositório), basta rodar:
