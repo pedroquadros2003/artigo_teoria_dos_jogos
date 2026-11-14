@@ -1,0 +1,61 @@
+\section{Modelo Resolvido}
+\label{sec:modelo_resolvido}
+
+Resolvemos a seguir, passo a passo, o modelo de leilão de primeiro preço com dois participantes e valores uniformes entre $0$ e $1$ \cite[p.~15--17]{vickrey1961}, comparando sua receita com a do leilão de segundo preço \cite[Apêndice~1.D, p.~48]{klemperer2004}.
+
+\subsection{Enunciado}
+\label{subsec:enunciado_modelo}
+
+\begin{itemize}
+    \item \textbf{Jogadores:} $N = \{1, 2\}$ (dois compradores neutros ao risco).
+    \item \textbf{Tipos / Valorações ($v_1, v_2$):} Cada jogador $i$ conhece seu valor privado $v_i$, sorteado de forma independente da distribuição uniforme no intervalo $[0, 1]$ ($v_i \sim U[0, 1]$). Propriedade crucial da uniforme em $[0, 1]$: para qualquer $x \in [0, 1]$, a probabilidade de uma variável uniforme ser menor que $x$ é o próprio $x$, isto é, $\mathbb{P}(v_2 < x) = x$.
+    \item \textbf{Ações:} Lances em envelope fechado $b_1 \ge 0$ e $b_2 \ge 0$. Quem der o maior lance vence o objeto (pagando o próprio lance $b_i$ no 1º Preço, ou pagando o lance do concorrente no 2º Preço).
+\end{itemize}
+
+\subsection{Solução Completa (Passo a Passo)}
+\label{subsec:solucao_passo_a_passo}
+
+Queremos encontrar a estratégia simétrica de Equilíbrio de Nash Bayesiano $\beta(v_i)$ --- a função estritamente crescente e diferenciável (com $\beta(0) = 0$) que indica quanto ofertar no \textbf{Leilão de 1º Preço} quando o valor privado é $v_i$:
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Probabilidade de vitória:} Suponha que o Jogador~$2$ siga a função de equilíbrio $b_2 = \beta(v_2)$. Se o Jogador~$1$ (com valor $v_1$) escolher dar um lance $b_1$, ele vence se $\beta(v_2) < b_1 \iff v_2 < \beta^{-1}(b_1)$. Como $v_2 \sim U[0, 1]$, para todo $b_1 \in [0, \beta(1)]$ (onde $0 \le \beta^{-1}(b_1) \le 1$), a probabilidade de $v_2$ ser menor que $\beta^{-1}(b_1)$ é o próprio $\beta^{-1}(b_1)$:
+    \begin{equation}
+    \mathbb{P}\big(\beta(v_2) < b_1\big) = \mathbb{P}\big(v_2 < \beta^{-1}(b_1)\big) = \beta^{-1}(b_1).
+    \end{equation}
+    \textit{Por que podemos ignorar o caso em que $\beta^{-1}(b_1) > 1$ (ou seja, $b_1 > \beta(1)$)?} Porque, como o valor do Jogador~$2$ nunca passa de~$1$ ($v_2 \in [0, 1]$) e $\beta(\cdot)$ é crescente, o \textbf{maior lance possível} que o Jogador~$2$ pode dar no melhor cenário ($v_2 = 1$) é $\beta(1)$. Se o Jogador~$1$ der um lance igual a $b_1 = \beta(1)$ (onde $\beta^{-1}(b_1) = 1$), ele \textbf{já ganha o leilão com $100\%$ de certeza ($\mathbb{P} = 1$)}! Escolher qualquer lance $b_1 > \beta(1)$ manteria a chance de ganhar travada em $100\%$, mas faria o Jogador~$1$ pagar mais caro à toa, reduzindo seu lucro $(v_1 - b_1)$. Logo, qualquer lance $b_1 > \beta(1)$ é estritamente dominado por $\beta(1)$, e todo jogador racional escolhe $b_1 \le \beta(1) \iff \beta^{-1}(b_1) \le 1$.
+
+    \item \textbf{Valor Esperado do Ganho (\textit{Payoff} Esperado) do Jogador 1:}
+    \begin{equation}
+    \Pi_1(b_1) = (v_1 - b_1)\cdot \mathbb{P}\big(\beta(v_2) < b_1\big) = (v_1 - b_1)\beta^{-1}(b_1).
+    \end{equation}
+
+    \item \textbf{Condição de Primeira Ordem (Maximizando em relação a $b_1$):} Derivando $\Pi_1(b_1)$ em relação a $b_1$ pela regra do produto e igualando a zero:
+    \begin{equation}
+    \frac{d\Pi_1}{db_1} = -\beta^{-1}(b_1) + (v_1 - b_1)\frac{d}{db_1}\!\big[\beta^{-1}(b_1)\big] = 0.
+    \end{equation}
+    Pelo teorema da derivada da função inversa, no ponto de equilíbrio em que o Jogador~$1$ também usa a estratégia ótima $b_1 = \beta(v_1)$, temos $\beta^{-1}(b_1) = v_1$ e $\frac{d}{db_1}[\beta^{-1}(b_1)] = \frac{1}{\beta'(v_1)}$. Substituindo na equação:
+    \begin{equation}
+    -v_1 + \frac{v_1 - \beta(v_1)}{\beta'(v_1)} = 0 \implies v_1 \beta'(v_1) + \beta(v_1) = v_1.
+    \end{equation}
+
+    \item \textbf{Resolvendo a Equação Diferencial:} O lado esquerdo $v_1 \beta'(v_1) + 1 \cdot \beta(v_1)$ é exatamente a derivada do produto $\frac{d}{dv_1}[v_1 \beta(v_1)]$, o que fornece o lance de equilíbrio\footnote{Generalização: com $n$ jogadores uniformes em $[0, 1]$, \cite[p.~17]{vickrey1961} mostra que o lance de equilíbrio no 1º preço é $b^*(v_i) = \frac{n-1}{n}v_i$: com $n=2$ oferta-se $\frac{1}{2}v_i$; com $n=3$, $\frac{2}{3}v_i$; com $n=10$, $\frac{9}{10}v_i$; quando $n \to \infty$, o lance tende a $100\%$ do valor.}:
+    \begin{equation}
+    \frac{d}{dv_1}\!\big[v_1 \beta(v_1)\big] = v_1 \implies v_1 \beta(v_1) = \int_0^{v_1} x\, dx = \frac{v_1^2}{2} \implies \boxed{b_{\text{1º}}^*(v_i) = \beta(v_i) = \frac{v_i}{2}.}
+    \end{equation}
+\end{enumerate}
+
+\subsection{Comparação da Receita Esperada e Interpretação}
+\label{subsec:interpretacao_modelo}
+
+Mostramos agora por que o vendedor ganha \textbf{exatamente $\frac{1}{3}$ em média} nos dois formatos:
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Receita Esperada no Leilão de 1º Preço ($\mathbb{E}[R_{\text{1º}}]$):} Quem ganha é o jogador de maior valor, $\max\{v_1, v_2\}$, pagando metade desse valor: $R_{\text{1º}} = \max\{b^*(v_1), b^*(v_2)\} = \frac{1}{2}\max\{v_1, v_2\}$. Como a probabilidade de duas uniformes independentes serem menores que $y$ é $F_{\max}(y) = \mathbb{P}(v_1 \le y)\mathbb{P}(v_2 \le y) = y^2$, a densidade do máximo é $f_{\max}(y) = (y^2)' = 2y$, e a média do máximo é:
+    \begin{equation}
+    \mathbb{E}[\max\{v_1, v_2\}] = \int_0^1 y \cdot (2y)\, dy = \left[\frac{2y^3}{3}\right]_0^1 = \frac{2}{3} \implies \boxed{\mathbb{E}[R_{\text{1º}}] = \frac{1}{2} \times \frac{2}{3} = \frac{1}{3}.}
+    \end{equation}
+
+    \item \textbf{Receita Esperada no Leilão de 2º Preço / Vickrey ($\mathbb{E}[R_{\text{2º}}]$):} No 2º preço, a estratégia dominante é $b^*(v_i) = v_i$. Vence o maior valor ($\max\{v_1, v_2\}$), mas paga o lance do 2º colocado, que entre 2 jogadores é o menor dos dois valores ($R_{\text{2º}} = \min\{v_1, v_2\}$). Como $\min\{v_1, v_2\} + \max\{v_1, v_2\} = v_1 + v_2$ e $\mathbb{E}[v_1 + v_2] = \frac{1}{2} + \frac{1}{2} = 1$, temos diretamente\footnote{Intuição geométrica \cite[p.~48]{klemperer2004}: $n$ sorteios uniformes em $[0, 1]$ dividem o intervalo em $n+1$ partes iguais em média. Para $n=2$, os valores dividem $[0, 1]$ em três terços ($\mathbb{E}[\min] = 1/3$ e $\mathbb{E}[\max] = 2/3$): no 2º Preço o vendedor recebe o menor valor ($1/3$), e no 1º Preço recebe metade do maior ($\frac{1}{2} \times \frac{2}{3} = 1/3$).}:
+    \begin{equation}
+    \mathbb{E}[\min\{v_1, v_2\}] = \mathbb{E}[v_1 + v_2] - \mathbb{E}[\max\{v_1, v_2\}] = 1 - \frac{2}{3} = \frac{1}{3} \implies \boxed{\mathbb{E}[R_{\text{2º}}] = \frac{1}{3} = \mathbb{E}[R_{\text{1º}}].}
+    \end{equation}
+\end{enumerate}

@@ -1,0 +1,73 @@
+\section{Caso Real: Leilões de Anúncios Online (Google Ads e \textit{Ad Exchanges})}
+\label{sec:caso_real}
+
+\subsection{Definições Prévias e Evolução Histórica (\texorpdfstring{1º Preço $\to$ 2º Preço $\to$ 1º Preço}{1º Preço para 2º Preço para 1º Preço})}
+\label{subsec:descricao_caso}
+
+Antes de analisarmos o mercado de anúncios digitais, definimos quatro termos básicos do setor:
+\begin{itemize}
+    \item \textbf{Impressão (\textit{Impression}):} Cada vez que uma página ou busca carrega e exibe um espaço publicitário para um usuário (disparando um leilão instantâneo em menos de $100$ milissegundos).
+    \item \textbf{CTR (\textit{Click-Through Rate} --- Taxa de Cliques):} Probabilidade (entre $0$ e $1$, ou em $\%$) de o usuário clicar no anúncio caso ele seja exibido (ex.: $\text{CTR} = 5\%$ significa $5$ cliques a cada $100$ exibições).
+    \item \textbf{CPC (\textit{Cost Per Click} --- Custo por Clique):} Modalidade em que o anunciante só paga à plataforma se o usuário efetivamente clicar no anúncio \cite{edelman2007,varian2007}.
+    \item \textbf{CPM (\textit{Cost Per Mille} --- Custo por Mil Impressões):} Modalidade usada em \textit{banners} (\textit{Ad Exchanges}) na qual o anunciante paga pela simples exibição do anúncio na tela \cite{despotakis2021}.
+\end{itemize}
+
+A história desse mercado divide-se em \textbf{duas grandes fases} que conectam todos os conceitos deste trabalho: (1) a \textbf{Fase 1 (1997--2018)}, quando o mercado abandonou o 1º Preço pioneiro da \textit{Overture/Yahoo} e migrou em 2002 para o \textbf{2º Preço} (GSP na busca do Google Ads e Vickrey puro no Google AdX) \cite{edelman2007,varian2007}; e (2) a \textbf{Fase 2 (2019--Presente)}, quando o Google Ad Manager e as \textit{Ad Exchanges} abandonaram o 2º Preço e voltaram ao \textbf{Leilão de 1º Preço} com algoritmos de \textit{Bid Shading} \cite{despotakis2021}.
+
+\subsubsection{A Primeira Mudança (2002): Do 1º para o 2º Preço (O Ciclo em ``Dente de Serra'')}
+
+Entre 1997 e 2001, na plataforma pioneira \textit{Overture}, o leilão era de \textbf{1º Preço} (quem vencesse pagava o próprio lance), mas os anunciantes podiam ver na tela quanto o concorrente estava ofertando e mudar o lance a qualquer segundo \cite[p.~245--246]{edelman2007}. Imagine dois anunciantes disputando o 1º lugar da busca: para a \textbf{Nike}, o clique vale até $v_{\text{Nike}} = \text{R\$\,10,00}$; para a \textbf{Adidas}, vale até $v_{\text{Adidas}} = \text{R\$\,5,00}$. Como era 1º Preço, cada um queria pagar apenas R\$\,0,01 a mais que o rival:
+\begin{enumerate}[label=\arabic*.]
+    \item A Adidas começa dando \textbf{R\$\,1,00}. O robô da Nike vê isso e muda seu lance para \textbf{R\$\,1,01};
+    \item Segundos depois, o robô da Adidas (que aguenta ir até R\$\,5,00) sobe para \textbf{R\$\,1,02}; a Nike sobe para \textbf{R\$\,1,03}, e ambos sobem de centavo em centavo até a Adidas atingir seu limite (\textbf{R\$\,5,00}) e a Nike cobrir com \textbf{R\$\,5,01};
+    \item \textbf{Mas o ciclo não parava em R\$\,5,01!} Quando a Nike assumia o topo por R\$\,5,01, a Adidas via que não conseguia mais vencer o 1º lugar e \textbf{derrubava seu lance de volta para o mínimo (R\$\,1,00)} para ficar em 2º lugar pagando barato;
+    \item No segundo seguinte, o robô da Nike via que a Adidas estava oferecendo só R\$\,1,00, percebia que estava pagando R\$\,5,01 à toa e \textbf{baixava seu lance para R\$\,1,01} --- fazendo a Adidas voltar a subir para R\$\,1,02 e reiniciando a escadinha $24$ horas por dia!
+\end{enumerate}
+
+Esse padrão em \textbf{``dente de serra'' (\textit{sawtooth})} sobrecarregava servidores, gerava gastos inúteis com robôs de contraespeculação \cite[p.~20]{vickrey1961} e reduzia a receita do buscador (pois durante a subida da escadinha a Adidas ficava em 1º lugar metade do tempo pagando barato). Em \textbf{2002}, o Google resolveu isso adotando o \textbf{2º Preço}: a Nike escreve \textbf{R\$\,10,00} uma única vez, a Adidas escreve \textbf{R\$\,5,00} uma única vez, e o próprio sistema do Google cobra automaticamente da Nike o lance da Adidas mais 1 centavo (\textbf{R\$\,5,01}), estabilizando o mercado \cite[p.~246]{edelman2007}.
+
+\subsubsection{A Segunda Mudança (2019): Por que o Mercado Voltou do 2º para o 1º Preço?}
+
+Por que então as corretoras de \textit{banners} (\textit{Ad Exchanges}) e o Google Ad Manager decidiram voltar para o \textbf{1º Preço} em 2019? Segundo \cite{despotakis2021}, dois problemas práticos destruíram o 2º Preço nos \textit{banners}:
+
+\paragraph{Motivo 1 --- A ``Trapaça do Leiloeiro'' no 2º Preço (Preços Mínimos Ocultos / \textit{Soft Floors}):}
+No 2º Preço, a Nike entrega seu valor máximo verdadeiro no envelope (\textbf{R\$\,10,00}) e a Adidas entrega \textbf{R\$\,2,00}; pela regra honesta, a Nike deveria pagar R\$\,2,00. Porém, ao abrir os envelopes e ver que a Nike topava pagar R\$\,10,00, muitas corretoras usavam ``preços mínimos ocultos de última hora'' (\textit{soft floors}): inventavam um piso de reserva de \textbf{R\$\,8,50} depois de espiar o lance da Nike e cobravam R\$\,8,50 dela \cite[p.~3]{despotakis2021}! Como o leilão era fechado no servidor da corretora, a Nike não tinha como auditar se existiu mesmo outro lance de R\$\,8,50. No \textbf{1º Preço}, isso acaba na hora: se a Nike escreve \textbf{R\$\,5,00} e ganha, ela paga exatamente os R\$\,5,00 que ela mesma escreveu.
+
+\paragraph{Motivo 2 --- O ``Torneio de Duas Etapas'' (\textit{Header Bidding}):}
+Os sites de notícias perceberam que ganhavam mais dinheiro colocando \textbf{duas ou mais corretoras para competir ao mesmo tempo} pelo mesmo \textit{banner} (ex.: \textbf{Corretora~A} contra \textbf{Corretora~B}), criando um \textbf{Torneio de 2 Etapas} \cite[p.~2--4]{despotakis2021}: na \textbf{Etapa~1 (Semifinal dentro de cada Corretora)}, cada corretora faz um leilão entre seus clientes e manda o valor vencedor para a Final; na \textbf{Etapa~2 (Grande Final no Site de Notícias)}, quem mandou o número maior leva o \textit{banner}. Veja o desastre quando a Corretora~A usava \textbf{2º Preço} na Semifinal:
+\begin{itemize}
+    \item \textbf{Na Semifinal da Corretora~A (2º Preço):} A \textbf{Nike} dá \textbf{R\$\,10,00} e a \textbf{Adidas} dá \textbf{R\$\,2,00}. A Nike vence a semifinal, mas pela regra de 2º Preço seu preço cai imediatamente para o lance da Adidas (\textbf{R\$\,2,00}). A Corretora~A envia apenas \textbf{R\$\,2,00} para a Grande Final!
+    \item \textbf{Na Semifinal da Corretora~B (1º Preço):} A \textbf{Puma} dá lance de \textbf{R\$\,6,00}, vence, e a Corretora~B envia \textbf{R\$\,6,00} para a Grande Final.
+    \item \textbf{Na Grande Final do Site de Notícias (R\$\,2,00 vs. R\$\,6,00):} \textbf{A Puma (com R\$\,6,00) derrota a Nike (que estava disposta a pagar R\$\,10,00)!} A regra de 2º Preço da Corretora~A reduziu o lance da Nike cedo demais (na semifinal), fazendo-a perder a Final!
+\end{itemize}
+Para que seus anunciantes parassem de perder na Final e a cobrança ficasse transparente, todas as corretoras --- encerrando com o Google em 2019 --- migraram para o \textbf{Leilão de 1º Preço} \cite[Proposição~4, p.~22]{despotakis2021}: agora, se a Nike dá um lance (com \textit{bid shading}) de R\$\,7,00 na Corretora~A, esse número vai inteiro (R\$\,7,00) até a Final e derrota os R\$\,6,00 da Puma!
+
+% =============================================================================
+\subsection{Modelagem como Jogo Bayesiano}
+\label{subsec:modelagem_caso}
+
+Traduzimos formalmente o leilão de anúncios online nos 4 elementos de um Jogo Bayesiano:
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Jogadores ($N = \{1, 2, \dots, n\}$):} Os $n$ anunciantes concorrentes (ex.: Nike, Adidas, Puma) que disputam em tempo real um espaço publicitário na tela de um usuário.
+    \item \textbf{Tipos e Informação Disponível ($v_i$ e $F$):} O \textbf{Tipo ($v_i$)} de cada anunciante é o valor monetário máximo (em R\$) que $1$ clique daquele usuário vale para ele. Na prática, se a Nike vende um tênis com \textbf{R\$\,200,00 de lucro líquido} e $1$ a cada $20$ pessoas que clicam no anúncio efetivamente compra o tênis (chance de conversão de $5\%$), então $1$ clique vale em média:
+    \begin{equation}
+    v_{\text{Nike}} = \underbrace{5\%}_{\text{Chance de conversão}} \times \underbrace{\text{R\$\,200,00}}_{\text{Lucro por venda}} = \textbf{R\$\,10,00 por clique}.
+    \end{equation}
+    É um jogo bayesiano porque $v_i$ é \textbf{Informação Privada} (só a Nike conhece sua margem de lucro e sua taxa de conversão internas), enquanto as regras do leilão e a distribuição estatística geral de mercado $F(v)$ dos concorrentes formam o \textbf{\textit{Prior} Comum}.
+    \item \textbf{Estratégias ($b_i(v_i)$):} Função que transforma o valor privado $v_i$ em um lance $b_i \ge 0$. Na \textbf{Fase~1 (2º Preço / Vickrey)}, a estratégia ótima é a revelação sincera $b_i^*(v_i) = v_i$. Na \textbf{Fase~2 (1º Preço após 2019)}, a estratégia ótima em ENB é aplicar \textit{Bid Shading}: $b_i^*(v_i) = \mathbb{E}[\max_{j \neq i} v_j \mid \max_{j \neq i} v_j < v_i] = \frac{n-1}{n}v_i < v_i$.
+    \item \textbf{Funções de \textit{Payoff} ($u_i$):} Se o anunciante perde ($b_i < \max_{j \neq i} b_j$), ganha $u_i = 0$. Se vence ($b_i > \max_{j \neq i} b_j$) e recebe o clique, seu ganho por clique no \textbf{2º Preço} ($p = \max_{j \neq i} b_j$) e no \textbf{1º Preço} ($p = b_i$) é:
+    \begin{equation}
+    u_i^{\text{2º Preço}} =
+    \begin{cases}
+        v_i - \max\limits_{j \neq i} b_j, & \text{se } b_i > \max\limits_{j \neq i} b_j, \\
+        0, & \text{se } b_i < \max\limits_{j \neq i} b_j;
+    \end{cases}
+    \qquad
+    u_i^{\text{1º Preço}} =
+    \begin{cases}
+        v_i - b_i, & \text{se } b_i > \max\limits_{j \neq i} b_j, \\
+        0, & \text{se } b_i < \max\limits_{j \neq i} b_j.
+    \end{cases}
+    \end{equation}
+    \textit{Onde entra o CTR no Payoff?} Antes de saber se o usuário vai clicar ou não no anúncio exibido, basta multiplicar o lucro de 1 clique $(v_i - p)$ pela probabilidade de clique: $\text{Payoff Esperado por Exibição} = \text{CTR} \times (v_i - p)$. Como $\text{CTR} > 0$ é uma constante positiva, maximizar $\text{CTR} \times (v_i - p)$ gera exatamente o mesmo lance ótimo que maximizar $(v_i - p)$ \cite[p.~1164]{varian2007}.
+\end{enumerate}

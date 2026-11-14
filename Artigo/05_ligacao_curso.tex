@@ -1,0 +1,16 @@
+\section{Ligação com o Curso}
+\label{sec:ligacao_curso}
+
+O estudo dos leilões como jogos bayesianos complementa o conteúdo da disciplina \textbf{GED-62 --- Teoria dos Jogos} em cinco pontos centrais:
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textbf{Superação da Hipótese de Informação Completa:} Nos jogos matriciais clássicos estudados no início do curso (como o Dilema dos Prisioneiros, a Batalha dos Sexos e o modelo de Cournot com custos conhecidos), cada jogador conhece exatamente os \textit{payoffs} do oponente. Os leilões mostram como aplicar a Teoria dos Jogos quando \textbf{há segredo sobre quanto o adversário valoriza o prêmio}, utilizando a Transformação de Harsanyi, na qual a Natureza sorteia os tipos privados \cite{harsanyi1967,gibbons1992}.
+    \item \textbf{Estratégia como Função (e não ponto isolado):} Em vez de escolher uma única linha ou coluna de uma matriz, a estratégia no equilíbrio bayesiano é uma função contínua $b_i(v_i)$ que define uma ação para cada um dos infinitos tipos possíveis.
+    \item \textbf{Contraste entre Dominância e Equilíbrio de Nash Bayesiano:}
+    \begin{itemize}
+        \item O \textbf{Leilão de 2º Preço (Vickrey)} resgata o conceito mais forte visto no início do curso: a \textbf{Estratégia Fracamente Dominante} ($b_i = v_i$), que não depende de crenças probabilísticas sobre os rivais, pois todas as demais estratégias $b_i \neq v_i$ são \textbf{Estratégias Fracamente Dominadas} (isto é, estratégias que nunca proporcionam um ganho maior do que $b_i = v_i$ em nenhum cenário e geram um ganho estritamente menor em pelo menos um cenário dos adversários) \cite[p.~20]{vickrey1961}.
+        \item O \textbf{Leilão de 1º Preço}, por outro lado, exige um \textbf{Equilíbrio de Nash Bayesiano} ($b_i = v_i/2$), que depende crucialmente da distribuição de probabilidade $F$ dos tipos rivais.
+    \end{itemize}
+    \item \textbf{Jogos Dinâmicos vs.\ Estáticos (Equivalência Estratégica):} Conecta os jogos sequenciais em forma extensiva (Leilão Inglês ascendente e Leilão Holandês descendente) com os jogos simultâneos em forma normal (Leilões em Envelope Fechado de 2º e de 1º Preço).
+    \item \textbf{Teoria dos Jogos Reversa (Desenho de Mecanismos):} Em vez de apenas resolver um jogo com regras fixas, o leiloeiro utiliza a Teoria dos Jogos para \textbf{projetar as regras do jogo} (escolha entre 1º e 2º preço, definição de preços de reserva e regras de transparência) de modo a induzir eficiência alocativa ou maximizar a receita esperada \cite{myerson1981,klemperer2004}.
+\end{enumerate}

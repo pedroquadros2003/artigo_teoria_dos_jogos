@@ -1,0 +1,73 @@
+Primeiro passo:
+
+
+- Crie uma pasta de nome Artigo e prepare um .tex, com todas as seções já prontas
+e formatadas conforme o pedido pelo professor, com referências nesse estilo:
+
+
+----------------------------------------------------------------------------
+\section{Referências da Literatura}
+
+\renewcommand{\refname}{}
+
+
+
+\begin{thebibliography}{9}
+%\bibitem[1]{analogdevices} Analog Devices. (n.d.). LTspice simulator. Retrieved from https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html.\\
+%\bibitem[1]{harris2002} Harris, C. E., Starnes Jr., J. H. and Shuart, M. J., Design and Manufacturing of Aerospace Composite Structures - State-of-the-Art Assessment; Journal of Aircraft; Vol. 39, No. 4, July–August 2002.\\
+
+% o que está dentro do [] é o nome da referência. Dentro do {} é a label
+
+\bibitem[1]{alexander2013} 
+ALEXANDER, Charles K.; SADIKU, Matthew N. O. Fundamentos de circuitos elétricos. 5. ed. Porto Alegre: AMGH, 2013.
+
+\end{thebibliography}
+
+----------------------------------------------------------------------------
+
+
+- Sobre a arquitetura do arquivo latex, quero que você dividas as seções em arquivos .tex
+e os importe (input{}) depois para o main.tex. Crie uma pasta Imagens da qual importaremos as imagens.
+Tenha em mente que o artigo que o professor está requerendo deve ser no estilo ABNT, incluindo as 
+referências
+
+
+
+- Coloque o nome dos integrantes do grupo: 
+
+João Matheus Alves Lima,
+Lucas Ulrich Rafagnin, 
+Mateus Fernandes Araujo,
+Pedro Ulisses de Lima Quadros,
+Thiago Henrique Bueno
+
+
+
+Segundo Passo
+
+
+
+- Crie um README.md que explique o conteúdo, já dando foco naquilo
+que precisaremos para o artigo e apresentação que o professor quer. 
+Esse markdown pode ser mais detalhado e esmiuçado justamente para ensinar 
+o conteúdo ao meu grupo, que irá ter que dar uma aula a respeito. Seja preciso
+na hora de definir termos, fazendo-o explicitamente, depois os utilizando como 
+se fosse matemática, em uma ordem que faça sentido. Pode, contudo, dispensar formalismos matemáticos.
+
+
+- Proponha diferentes casos de estudo para que adotemos tanto na apresentação
+quanto no artigo, dentre aqueles que o professor permitiu. Descreva o suficiente
+para que eu possa escolher algum deles conforme o que eu achar mais adequado, didático
+e simples. Veja se em algum desses casos cabe alguma simulação ou programa didático que
+poderíamos apresentar na aula. Acho que isso tornaria a apresentação mais interessante
+
+
+
+- Sobre as referências, eu quero que você se baseie no livro e no pdf que estão nessa pasta para 
+montar o README. Use-as como suas referências e, quando julgar adequado, cite o trecho de onde você
+está tirando essa informação.
+
+
+Terceiro Passo
+
+- Planejar slides
