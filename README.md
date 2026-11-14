@@ -103,7 +103,7 @@ Essa é uma das dúvidas mais importantes de toda a Teoria dos Jogos. Vamos desm
 
 Em Teoria dos Jogos, sempre que aparece o índice **"$-i$"** (lê-se *"menos $i$"* ou *"todos exceto $i$"*), ele é uma abreviação padrão para representar **o vetor de todos os outros jogadores da mesa, tirando o jogador $i$**:
 - **$\theta_{-i}$ (Tipos de todos os outros exceto $i$):**  
-  Se o jogo tem $n$ jogadores $\{1, 2, \dots, n\}$, então:
+  Se o jogo tem $n$ jogadores $\lbrace 1, 2, \dots, n\rbrace$, então:
   $$\theta_{-i} = (\theta_1, \dots, \theta_{i-1}, \theta_{i+1}, \dots, \theta_n)$$
   - *Exemplo com 2 jogadores (João = 1, Lucas = 2):* Se estamos olhando do ponto de vista do João ($i = 1$), quem é "todo mundo menos o João" ($-1$)? É só o Lucas ($2$)! Então $\theta_{-1} = \theta_2$.
   - *Exemplo com 3 jogadores (1, 2 e 3):* Para o Jogador 1 ($i=1$), $\theta_{-1} = (\theta_2, \theta_3)$, que é o par de tipos dos dois adversários dele.
@@ -116,13 +116,13 @@ Em Teoria dos Jogos, sempre que aparece o índice **"$-i$"** (lê-se *"menos $i$
 
 ---
 
-Agora veja como o conceito de **Tipo**, de **Prior Comum** e da notação **$-i$** transforma a definição de **Estratégia** e de **Equilíbrio**:
+Agora veja como o conceito de **Tipo**, de **Prior Comum** e da notação $-i$ transforma a definição de **Estratégia** e de **Equilíbrio**:
 
 > **Definição 5 — Estratégia em um Jogo Bayesiano ($b_i(\theta_i)$):**  
 > Em um jogo bayesiano, uma estratégia **não é uma única ação isolada**, mas sim um **plano completo (uma função matemática)** que especifica qual ação (lance) o jogador $i$ escolherá **para cada Tipo $\theta_i$ que a Natureza possa ter sorteado para ele**.
 
 **Por que a estratégia precisa ser uma função e não um número só?**  
-Imagine que você é o Jogador 1 e seu valor sorteado hoje foi $v_1 = \text{R\$ } 80$. Para você decidir quanto dar de lance hoje, você precisa pensar no que o Jogador 2 vai fazer. Mas você **não sabe** qual valor $v_2$ o Jogador 2 tirou hoje! O Jogador 2 pode ter tirado $v_2 = \text{R\$ } 10$, ou $v_2 = \text{R\$ } 50$, ou $v_2 = \text{R\$ } 90$.  
+Imagine que você é o Jogador 1 e seu valor sorteado hoje foi $v_1 = 80$ (R\$ 80). Para você decidir quanto dar de lance hoje, você precisa pensar no que o Jogador 2 vai fazer. Mas você **não sabe** qual valor $v_2$ o Jogador 2 tirou hoje! O Jogador 2 pode ter tirado $v_2 = 10$ (R\$ 10), ou $v_2 = 50$ (R\$ 50), ou $v_2 = 90$ (R\$ 90).  
 Portanto, você só consegue calcular a probabilidade de vencer o Jogador 2 se você souber a **regra (função)** $b_2(v_2)$ que o Jogador 2 usa para transformar *qualquer valor $v_2$ que ele tenha tirado* em um lance! Por exemplo: *"Eu não sei quanto o carro vale para o Lucas, mas sei que a regra estratégica do Lucas é dar de lance metade do valor dele: $b_2(v_2) = 0,5 \cdot v_2$"*.
 
 > **Definição 6 — Equilíbrio de Nash Bayesiano (ENB):**  
@@ -135,7 +135,7 @@ Portanto, você só consegue calcular a probabilidade de vencer o Jogador 2 se v
 **Cuidado! Essa é uma distinção fundamental entre o seu próprio tipo ($\theta_i$) e os tipos dos seus adversários ($\theta_{-i}$):**
 
 1. **Em relação ao SEU PRÓPRIO tipo ($\theta_i$): SIM, para qualquer tipo seu!**  
-   A sua função de equilíbrio $b_i^*(\theta_i)$ precisa ser a melhor resposta **para cada valor $\theta_i$ que VOCÊ possa ter tirado**. Se você tirou $v_1 = \text{R\$ } 20$, $b_1^*(20)$ tem que ser ótimo; se tirou $v_1 = \text{R\$ } 80$, $b_1^*(80)$ tem que ser ótimo. Por quê? Porque na hora de escrever o envelope, **você já sabe qual é o seu próprio tipo $\theta_i$**!
+   A sua função de equilíbrio $b_i^*(\theta_i)$ precisa ser a melhor resposta **para cada valor $\theta_i$ que VOCÊ possa ter tirado**. Se você tirou $v_1 = 20$ (R\$ 20), $b_1^*(20)$ tem que ser ótimo; se tirou $v_1 = 80$ (R\$ 80), $b_1^*(80)$ tem que ser ótimo. Por quê? Porque na hora de escrever o envelope, **você já sabe qual é o seu próprio tipo $\theta_i$**!
 
 2. **Em relação à combinação com os tipos DOS OUTROS ($\theta_{-i}$): NÃO para cada combinação isolada (*ex post*), mas SIM NA MÉDIA ESPERADA (*interim*)!**  
    Por que o ENB **não** exige atingir o ganho máximo para cada combinação específica $(\theta_1, \theta_2)$ realizada? **Porque na hora de dar o lance você não tem bola de cristal para saber qual tipo $\theta_2$ o seu adversário tirou naquela rodada!**  
@@ -180,7 +180,7 @@ Agora que sabemos o que é um **Jogo Bayesiano**, um **Tipo**, um **Prior Comum*
 > $$u_i = v_i - p$$
 > Se o jogador $i$ perde o leilão e não paga nada, o seu *payoff* é $u_i = 0$.
 
-**Exemplo numérico simples:** Se um relógio raro vale para você $v_i = \text{R\$ } 1.000$ (porque é o máximo que você pagaria sem ficar triste nem feliz) e você vence o leilão pagando $p = \text{R\$ } 650$, você sai da sala com um ganho líquido de utilidade (*payoff*) de $1.000 - 650 = \text{R\$ } 350$. Se você pagasse $p = \text{R\$ } 1.100$, teria um *payoff* negativo de $-\text{R\$ } 100$ (prejuízo).
+**Exemplo numérico simples:** Se um relógio raro vale para você $v_i = 1.000$ (R\$ 1.000) (porque é o máximo que você pagaria sem ficar triste nem feliz) e você vence o leilão pagando $p = 650$ (R\$ 650), você sai da sala com um ganho líquido de utilidade (*payoff*) de $1.000 - 650 = 350$ (R\$ 350). Se você pagasse $p = 1.100$ (R\$ 1.100), teria um *payoff* negativo de $-100$ (prejuízo de R\$ 100).
 
 Como essa **Valoração ($v_i$)** se relaciona com o **Tipo ($\theta_i$)** de cada jogador? Existem dois ambientes clássicos na teoria dos leilões (KLEMPERER, 2004, p. 13–14):
 
@@ -250,7 +250,7 @@ Na prática e na teoria, o **Leilão Inglês (Ascendente)** pode ser conduzido d
 
 3. **Por que a Modalidade 1 (participantes propondo lances) e a Modalidade 2 (abaixar a mão no relógio) dão exatamente o mesmo resultado?**  
    Veja um **exemplo numérico passo a passo** com 3 participantes:
-   - Suponha que o quadro vale **$v_{\text{Ana}} = \text{R\$ } 50$** para a Ana, **$v_{\text{Lucas}} = \text{R\$ } 80$** para o Lucas e **$v_{\text{João}} = \text{R\$ } 100$** para o João.
+   - Suponha que o quadro vale $v_{\text{Ana}} = 50$ (R\$ 50) para a Ana, $v_{\text{Lucas}} = 80$ (R\$ 80) para o Lucas e $v_{\text{João}} = 100$ (R\$ 100) para o João.
    - **No modelo do Relógio (abaixar a mão):**
      - O telão começa em R\$ 0 com os três de mão levantada.
      - Quando o telão bate **R\$ 50**, a Ana pensa: *"Passou de R\$ 50 eu tenho prejuízo"*, e **abaixa a mão**. Continuam Lucas e João.
@@ -321,14 +321,14 @@ Lembre-se da regra do **Leilão de Segundo Preço (Vickrey)**:
 - Você paga **o número que o SEU ADVERSÁRIO (o 2º colocado) escreveu no envelope dele!**
 
 Vamos colocar números nisso. Suponha que estamos só você e um adversário disputando o relógio:
-- Para **você**, o relógio vale **$v_1 = \text{R\$ } 100$**.
+- Para **você**, o relógio vale $v_1 = 100$ (R\$ 100).
 - O seu **adversário** escreveu um valor $M$ qualquer no envelope dele (que você não sabe qual é).
 
 Primeiro, responda a esta pergunta simples: **Abaixo de qual preço vale a pena você levar esse relógio para casa, e acima de qual preço é furada (prejuízo)?**
-- Se o preço a pagar (que é o lance $M$ do adversário!) for **menor que R\$ 100** (ex.: $M = \text{R\$ } 60$ ou $M = \text{R\$ } 85$), **você QUER ganhar**, porque vai pagar menos de R\$ 100 por algo que vale R\$ 100 para você!
-- Se o preço a pagar (o lance $M$ do adversário) for **maior que R\$ 100** (ex.: $M = \text{R\$ } 110$ ou $M = \text{R\$ } 150$), **você QUER PERDER**, porque se ganhar terá que pagar mais de R\$ 100 por algo que só vale R\$ 100 para você!
+- Se o preço a pagar (que é o lance $M$ do adversário!) for **menor que R\$ 100** (ex.: $M = 60$ ou $M = 85$), **você QUER ganhar**, porque vai pagar menos de R\$ 100 por algo que vale R\$ 100 para você!
+- Se o preço a pagar (o lance $M$ do adversário) for **maior que R\$ 100** (ex.: $M = 110$ ou $M = 150$), **você QUER PERDER**, porque se ganhar terá que pagar mais de R\$ 100 por algo que só vale R\$ 100 para você!
 
-Agora veja o que acontece quando você escreve **exatamente a verdade ($b_1 = \text{R\$ } 100$)** no seu envelope:
+Agora veja o que acontece quando você escreve **exatamente a verdade ($b_1 = 100$)** no seu envelope:
 - O seu lance de **R\$ 100** funciona como um **"filtro automático perfeito"**:
   - Sempre que o lance do adversário $M$ for **menor que R\$ 100** (quando dá lucro!), o seu envelope de R\$ 100 **ganha** dele, e você paga só $M$!
   - Sempre que o lance do adversário $M$ for **maior que R\$ 100** (quando daria prejuízo!), o seu envelope de R\$ 100 **perde** para ele, salvando você de pagar caro demais!
@@ -337,19 +337,19 @@ Agora veja o que acontece quando você escreve **exatamente a verdade ($b_1 = \t
 
 #### 📊 Teste dos Céticos: "Mas o que acontece se eu tentar ser esperto e mentir no envelope?"
 
-Vamos testar na tabela abaixo! O relógio vale **$v_1 = \text{R\$ } 100$** para você. Compare o que acontece em três estratégias diferentes suas:
-1. **Falar a verdade:** escrever **$b_1 = \text{R\$ } 100$**;
-2. **Tentar dar uma de esperto e baixar o lance:** escrever **$b_1 = \text{R\$ } 70$** (achando que vai economizar);
-3. **Tentar ser agressivo e inflar o lance:** escrever **$b_1 = \text{R\$ } 120$** (para intimidar e ganhar mais vezes).
+Vamos testar na tabela abaixo! O relógio vale $v_1 = 100$ (R\$ 100) para você. Compare o que acontece em três estratégias diferentes suas:
+1. **Falar a verdade:** escrever $b_1 = 100$ (R\$ 100);
+2. **Tentar dar uma de esperto e baixar o lance:** escrever $b_1 = 70$ (R\$ 70) (achando que vai economizar);
+3. **Tentar ser agressivo e inflar o lance:** escrever $b_1 = 120$ (R\$ 120) (para intimidar e ganhar mais vezes).
 
 Olhe na tabela o que acontece com o **seu lucro líquido** para cada possível lance $M$ que esteja dentro do envelope do seu adversário:
 
 | Quanto estava no envelope do Adversário ($M$)? | Se você falar a VERDADE ($b_1 = 100$) | Se você MENTIR PARA BAIXO ($b_1 = 70$) | Se você MENTIR PARA CIMA ($b_1 = 120$) |
 | :--- | :--- | :--- | :--- |
-| **Caso 1: Adversário deu pouco ($M = \text{R\$ } 50$)** | Você ganha ($100 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. | Você ganha ($70 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. *(Baixar para 70 não economizou 1 centavo!)* | Você ganha ($120 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. *(Não mudou nada).* |
-| **Caso 2: Adversário deu médio ($M = \text{R\$ } 85$)** | ✅ **Você ganha** ($100 > 85$), paga o lance dele (**R\$ 85**) e **lucra +R\$ 15**! | ❌ **VOCÊ PERDE** ($70 < 85$) e fica com **R\$ 0**! *(Por tentar baixar o lance para 70, você jogou fora R\$ 15 de lucro!)* | ✅ Você ganha ($120 > 85$), paga **R\$ 85** e lucra **+R\$ 15**. *(Igual a falar a verdade).* |
-| **Caso 3: Adversário deu alto ($M = \text{R\$ } 110$)** | ✅ **Você perde** ($100 < 110$) e fica com **R\$ 0** *(escapou de pagar 110 por algo que vale 100!)*. | ✅ Você perde ($70 < 110$) e fica com **R\$ 0**. *(Igual a falar a verdade).* | ❌ **VOCÊ GANHA** ($120 > 110$), é **obrigado a pagar R\$ 110** por algo que só vale 100 e toma **PREJUÍZO de -R\$ 10**! |
-| **Caso 4: Adversário deu muito alto ($M = \text{R\$ } 130$)** | Você perde ($100 < 130$) e fica com **R\$ 0**. | Você perde ($70 < 130$) e fica com **R\$ 0**. | Você perde ($120 < 130$) e fica com **R\$ 0**. |
+| **Caso 1: Adversário deu pouco ($M = 50$)** | Você ganha ($100 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. | Você ganha ($70 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. *(Baixar para 70 não economizou 1 centavo!)* | Você ganha ($120 > 50$), paga o lance dele (**R\$ 50**) e lucra **+R\$ 50**. *(Não mudou nada).* |
+| **Caso 2: Adversário deu médio ($M = 85$)** | ✅ **Você ganha** ($100 > 85$), paga o lance dele (**R\$ 85**) e **lucra +R\$ 15**! | ❌ **VOCÊ PERDE** ($70 < 85$) e fica com **R\$ 0**! *(Por tentar baixar o lance para 70, você jogou fora R\$ 15 de lucro!)* | ✅ Você ganha ($120 > 85$), paga **R\$ 85** e lucra **+R\$ 15**. *(Igual a falar a verdade).* |
+| **Caso 3: Adversário deu alto ($M = 110$)** | ✅ **Você perde** ($100 < 110$) e fica com **R\$ 0** *(escapou de pagar 110 por algo que vale 100!)*. | ✅ Você perde ($70 < 110$) e fica com **R\$ 0**. *(Igual a falar a verdade).* | ❌ **VOCÊ GANHA** ($120 > 110$), é **obrigado a pagar R\$ 110** por algo que só vale 100 e toma **PREJUÍZO de -R\$ 10**! |
+| **Caso 4: Adversário deu muito alto ($M = 130$)** | Você perde ($100 < 130$) e fica com **R\$ 0**. | Você perde ($70 < 130$) e fica com **R\$ 0**. | Você perde ($120 < 130$) e fica com **R\$ 0**. |
 
 Olhe para as duas últimas colunas da tabela e tire a prova real. Por isso, a conclusão de Vickrey (1961) foi: Não existe nenhum cenário em que mentir (para baixo ou para cima) dê mais dinheiro do que falar a verdade ($b_i = v_i$), e existem cenários em que mentir dá prejuízo! Por isso, $b_i = v_i$ é uma **Estratégia Fracamente Dominante** (e qualquer estratégia mentirosa $b_i \neq v_i$ é uma **Estratégia Fracamente Dominada**, isto é, uma estratégia para a qual existe outra — falar a verdade — que gera um *payoff* sempre maior ou igual para qualquer jogada dos adversários, e estritamente maior em pelo menos um cenário)!
 
@@ -407,9 +407,9 @@ Para entender por que a receita do **1º Preço** empata exatamente com a do **2
    Olhe o **"cabo de guerra"** entre os dois formatos para um leilão com 2 jogadores (valores sorteados entre R\$ 0 e R\$ 100):
    - Em média, o **1º colocado** (o maior de dois números sorteados uniformemente entre 0 e 100) vale **R\$ 66,67** ($\frac{2}{3}$ de 100), enquanto o **2º colocado** (o menor dos dois números) vale **R\$ 33,33** ($\frac{1}{3}$ de 100).
    - **No Leilão de 1º Preço:** O vendedor tem a vantagem de receber o lance do **1º colocado** (que vale em média R\$ 66,67), **MAS** tem a desvantagem de que o 1º colocado corta o próprio lance pela metade (*bid shading* de 50%). Quanto o vendedor recebe em média?  
-     $$50\% \text{ do 1º colocado} = 50\% \times \text{R\$ } 66,67 = \textbf{R\$ 33,33}$$
+     $$50\% \text{ do 1º colocado} = 50\% \times 66{,}67 = \mathbf{33{,}33}$$
    - **No Leilão de 2º Preço (Vickrey):** O vendedor tem a vantagem de que ninguém corta o lance (todos dão 100% do próprio valor), **MAS** tem a desvantagem de só poder cobrar o lance do **2º colocado** (que vale em média R\$ 33,33). Quanto o vendedor recebe em média?  
-     $$100\% \text{ do 2º colocado} = 100\% \times \text{R\$ } 33,33 = \textbf{R\$ 33,33}$$
+     $$100\% \text{ do 2º colocado} = 100\% \times 33{,}33 = \mathbf{33{,}33}$$
    - **Conclusão:** Cobrar **metade do valor do 1º colocado** (no 1º Preço) dá exatamente a mesma quantia que cobrar **100% do valor do 2º colocado** (no 2º Preço)! O desconto (*bid shading*) que o vencedor dá no 1º Preço é exatamente do tamanho da diferença entre o 1º e o 2º colocado!
 
 ### 📈 Validação Computacional (Simulação de Monte Carlo — 10.000 Leilões)
@@ -478,7 +478,7 @@ O professor pediu especificamente para o Grupo 5:
 Abaixo está a resolução completa pela **equação diferencial geral** (VICKREY, 1961, p. 15–17; KLEMPERER, 2004, Apêndice 1.D, p. 48), sem precisar assumir *a priori* que a estratégia é linear.
 
 ### 6.1. O Cenário do Jogo
-- **Jogadores:** $N = \{1, 2\}$ (dois compradores neutros ao risco).
+- **Jogadores:** $N = \lbrace 1, 2\rbrace$ (dois compradores neutros ao risco).
 - **Tipos / Valorações ($v_1, v_2$):** Cada jogador $i$ sabe seu valor privado $v_i$, sorteado de forma independente da distribuição uniforme no intervalo $[0,1]$.
   - Propriedade crucial da distribuição uniforme em $[0,1]$: para qualquer número $x$ entre $0$ e $1$, **a probabilidade de uma variável uniforme ser menor que $x$ é o próprio $x$**:
     $$\mathbb{P}(v_2 < x) = x$$
@@ -496,7 +496,7 @@ Queremos encontrar a estratégia simétrica de Equilíbrio de Nash Bayesiano $\b
    Como $v_2 \sim U[0,1]$, para todo $b_1 \in [0, \beta(1)]$ (onde $0 \le \beta^{-1}(b_1) \le 1$), a probabilidade de $v_2$ ser menor que $\beta^{-1}(b_1)$ é o próprio $\beta^{-1}(b_1)$:
    $$\mathbb{P}\big(\beta(v_2) < b_1\big) = \mathbb{P}\big(v_2 < \beta^{-1}(b_1)\big) = \beta^{-1}(b_1)$$
    > **Por que podemos ignorar o caso em que $\beta^{-1}(b_1) > 1$ (ou seja, $b_1 > \beta(1)$)?**  
-   > Porque como o valor do Jogador 2 nunca passa de $1$ ($v_2 \in [0,1]$) e $\beta(\cdot)$ é crescente, o **maior lance possível** que o Jogador 2 pode dar no melhor cenário possível ($v_2 = 1$) é **$\beta(1)$**!  
+   > Porque como o valor do Jogador 2 nunca passa de $1$ ($v_2 \in [0,1]$) e $\beta(\cdot)$ é crescente, o **maior lance possível** que o Jogador 2 pode dar no melhor cenário possível ($v_2 = 1$) é $\beta(1)$!  
    > Isso significa que, se o Jogador 1 der um lance exatamente igual a $b_1 = \beta(1)$ (onde $\beta^{-1}(b_1) = 1$), ele **já ganha o leilão com 100% de certeza ($\mathbb{P} = 1$)**!  
    > Se o Jogador 1 escolhesse qualquer lance $b_1 > \beta(1)$ (que corresponderia a $\beta^{-1}(b_1) > 1$), a chance de ganhar continuaria travada em 100% (não tem como passar de 100%), mas ele **pagaria mais caro à toa**, diminuindo o seu lucro $(v_1 - b_1)$! Ou seja: qualquer lance $b_1 > \beta(1)$ é **estritamente dominado** por $\beta(1)$, e por isso todo jogador racional escolhe $b_1 \le \beta(1) \iff \beta^{-1}(b_1) \le 1$.
 
@@ -527,23 +527,23 @@ Queremos encontrar a estratégia simétrica de Equilíbrio de Nash Bayesiano $\b
 Agora fechamos a segunda metade do Modelo Resolvido mostrando por que o vendedor ganha **exatamente $\frac{1}{3}$ em média** nos dois leilões:
 
 #### 1. Receita Esperada no Leilão de Primeiro Preço ($\mathbb{E}[R_{\text{1º}}]$):
-- Quem ganha é o jogador de maior valor, $\max\{v_1, v_2\}$, mas ele paga **metade** desse valor:
-  $$R_{\text{1º}} = \max\{b^*(v_1), b^*(v_2)\} = \frac{1}{2} \max\{v_1, v_2\}$$
+- Quem ganha é o jogador de maior valor, $\max\lbrace v_1, v_2\rbrace$, mas ele paga **metade** desse valor:
+  $$R_{\text{1º}} = \max\lbrace b^*(v_1), b^*(v_2)\rbrace  = \frac{1}{2} \max\lbrace v_1, v_2\rbrace$$
 - Qual é o valor esperado do máximo de duas variáveis uniformes independentes em $[0,1]$?
   - A probabilidade de ambas serem menores que $y$ é $F_{\max}(y) = \mathbb{P}(v_1 \le y)\mathbb{P}(v_2 \le y) = y \cdot y = y^2$.
   - A densidade do máximo é a derivada de $y^2$, que é $f_{\max}(y) = 2y$.
   - Logo, a média do máximo é:
-    $$\mathbb{E}[\max\{v_1, v_2\}] = \int_0^1 y \cdot (2y)\,dy = \left[\frac{2y^3}{3}\right]_0^1 = \frac{2}{3}$$
+    $$\mathbb{E}[\max\lbrace v_1, v_2\rbrace] = \int_0^1 y \cdot (2y)\,dy = \left[\frac{2y^3}{3}\right]_0^1 = \frac{2}{3}$$
 - Como o vencedor no 1º preço paga **metade** do seu valor:
   $$\boxed{\mathbb{E}[R_{\text{1º}}] = \frac{1}{2} \times \frac{2}{3} = \frac{1}{3}}$$
 
 #### 2. Receita Esperada no Leilão de Segundo Preço / Vickrey ($\mathbb{E}[R_{\text{2º}}]$):
 - No leilão de 2º preço, como vimos na Seção 3.2, a estratégia dominante é falar a verdade: $b^*(v_i) = v_i$.
-- Quem ganha é o maior valor ($\max\{v_1, v_2\}$), mas ele paga o lance do segundo colocado, que entre 2 jogadores é o **menor dos dois valores** ($\min\{v_1, v_2\}$):
-  $$R_{\text{2º}} = \min\{v_1, v_2\}$$
+- Quem ganha é o maior valor ($\max\lbrace v_1, v_2\rbrace$), mas ele paga o lance do segundo colocado, que entre 2 jogadores é o **menor dos dois valores** ($\min\lbrace v_1, v_2\rbrace$):
+  $$R_{\text{2º}} = \min\lbrace v_1, v_2\rbrace$$
 - Qual é o valor esperado do mínimo de duas variáveis uniformes em $[0,1]$?
   - Como a soma do mínimo com o máximo é $v_1 + v_2$, e $\mathbb{E}[v_1 + v_2] = \frac{1}{2} + \frac{1}{2} = 1$, temos diretamente:
-    $$\mathbb{E}[\min\{v_1, v_2\}] = \mathbb{E}[v_1 + v_2] - \mathbb{E}[\max\{v_1, v_2\}] = 1 - \frac{2}{3} = \frac{1}{3}$$
+    $$\mathbb{E}[\min\lbrace v_1, v_2\rbrace] = \mathbb{E}[v_1 + v_2] - \mathbb{E}[\max\lbrace v_1, v_2\rbrace] = 1 - \frac{2}{3} = \frac{1}{3}$$
   - (Ou via integral da densidade $f_{\min}(y) = 2(1-y)$: $\int_0^1 y \cdot 2(1-y)\,dy = \frac{1}{3}$).
 - Logo:
   $$\boxed{\mathbb{E}[R_{\text{2º}}] = \frac{1}{3} = \mathbb{E}[R_{\text{1º}}]}$$
@@ -551,8 +551,8 @@ Agora fechamos a segunda metade do Modelo Resolvido mostrando por que o vendedor
 > **Intuição Visual das " Fatias do Intervalo $[0,1]$ " (KLEMPERER, 2004, Apêndice 1.D, p. 48):**  
 > Quando você sorteia $N$ números uniformemente entre $0$ e $1$, eles dividem o segmento $[0,1]$ em $N+1$ pedaços iguais em média!  
 > Para $N=2$ jogadores, os dois valores sorteados dividem o intervalo $[0,1]$ em 3 terços:
-> - O menor valor ($\min\{v_1, v_2\}$) cai em média em **$1/3$**;
-> - O maior valor ($\max\{v_1, v_2\}$) cai em média em **$2/3$**.  
+> - O menor valor ($\min\lbrace v_1, v_2\rbrace$) cai em média em $1/3$;
+> - O maior valor ($\max\lbrace v_1, v_2\rbrace$) cai em média em $2/3$.  
 > No **2º Preço**, o vendedor recebe o menor valor ($1/3$). No **1º Preço**, o vendedor recebe metade do maior valor ($\frac{1}{2} \times \frac{2}{3} = 1/3$). Ambos dão $1/3$!
 
 ---
@@ -597,8 +597,8 @@ Para entender por que o Google adotou o **Leilão de 2º Preço** em 2002, preci
   Na *Overture*, o leilão era de **1º Preço** (quem vencesse pagava o próprio lance), mas os anunciantes podiam ver na tela quanto o concorrente estava ofertando e alterar o próprio lance a qualquer segundo.
 - **O Ciclo Infinito da "Guerra de Centavos" (Gráfico em Dente de Serra):**  
   Imagine dois anunciantes disputando o 1º lugar da busca:
-  - Para a **Nike**, o clique vale até **$v_{\text{Nike}} = \text{R\$ } 10,00$**;
-  - Para a **Adidas**, o clique vale até **$v_{\text{Adidas}} = \text{R\$ } 5,00$**.  
+  - Para a **Nike**, o clique vale até $v_{\text{Nike}} = 10{,}00$ (R\$ 10,00);
+  - Para a **Adidas**, o clique vale até $v_{\text{Adidas}} = 5{,}00$ (R\$ 5,00).  
   Como a regra era de **1º Preço**, nenhum dos dois queria pagar seu valor cheio: cada um queria pagar **apenas R\$ 0,01 a mais que o rival**! Veja o que os robôs das duas empresas faziam segundo a segundo:
   1. A Adidas começa dando **R\$ 1,00**.
   2. O robô da Nike vê isso e pensa: *"Para que vou dar R\$ 10,00 se posso ganhar da Adidas pagando só **R\$ 1,01**?"* $\to$ Nike muda o lance para **R\$ 1,01**.
@@ -664,18 +664,18 @@ Segundo o artigo de **Despotakis, Ravi e Sayedi (2021)**, dois novos problemas p
 
 Abaixo está a tradução formal de um leilão de anúncio online para os 4 elementos de um Jogo Bayesiano (exatamente como o professor pede nos critérios de avaliação):
 
-#### 1. Jogadores ($N = \{1, 2, \dots, n\}$)
+#### 1. Jogadores ($N = \lbrace 1, 2, \dots, n\rbrace$)
 São os $n$ anunciantes concorrentes (por exemplo: Nike, Adidas, Puma) que disputam em tempo real um espaço publicitário na tela de um usuário específico.
 
 #### 2. Tipos e Informação Disponível ($v_i$ e $F$)
 - **O que é o Tipo ($v_i$) de cada anunciante?**  
   É o **valor monetário máximo (em R\$)** que 1 clique daquele usuário vale para o anunciante $i$.
 - **Como o anunciante calcula o seu próprio $v_i$ na prática? (Exemplo numérico):**  
-  Suponha que a **Nike** vende um tênis que deixa **R\$ 200,00 de lucro líquido** por par vendido. Pelos dados históricos do site da Nike, a cada 20 pessoas que clicam no anúncio, 1 pessoa efetivamente compra o tênis (ou seja, a probabilidade de o clique virar venda é de **$5\%$**).  
+  Suponha que a **Nike** vende um tênis que deixa **R\$ 200,00 de lucro líquido** por par vendido. Pelos dados históricos do site da Nike, a cada 20 pessoas que clicam no anúncio, 1 pessoa efetivamente compra o tênis (ou seja, a probabilidade de o clique virar venda é de $5\%$).  
   Logo, quanto vale **1 clique** em média para a Nike?
-  $$v_{\text{Nike}} = \underbrace{5\%}_{\text{Chance de o clique virar compra}} \times \underbrace{\text{R\$ } 200,00}_{\text{Lucro por venda}} = \textbf{R\$ 10,00 por clique}$$
+  $$v_{\text{Nike}} = \underbrace{5\%}_{\text{Chance de o clique virar compra}} \times \underbrace{200{,}00}_{\text{Lucro por venda (reais)}} = \mathbf{10{,}00 \text{ reais por clique}}$$
 - **Por que é um Jogo de Informação Incompleta (Bayesiano)?**
-  - **Informação Privada (Tipo $v_i$):** Só a Nike conhece os seus próprios dados internos (sua margem de lucro de R\$ 200 e sua taxa de conversão de 5%); portanto, só a Nike sabe que $v_{\text{Nike}} = \text{R\$ } 10,00$. A Adidas sabe o seu próprio valor $v_{\text{Adidas}}$, mas não sabe o valor exato da Nike.
+  - **Informação Privada (Tipo $v_i$):** Só a Nike conhece os seus próprios dados internos (sua margem de lucro de R\$ 200 e sua taxa de conversão de 5%); portanto, só a Nike sabe que $v_{\text{Nike}} = 10{,}00$ (R\$ 10,00). A Adidas sabe o seu próprio valor $v_{\text{Adidas}}$, mas não sabe o valor exato da Nike.
   - **Informação de Conhecimento Comum (*Prior* Comum $F$):** Todos os anunciantes conhecem as regras do leilão da plataforma e a distribuição estatística geral de mercado $F(v)$ da qual os valores dos concorrentes daquele setor são sorteados.
 
 #### 3. Estratégias ($b_i(v_i)$)
@@ -700,7 +700,7 @@ Se o anunciante $i$ vence o leilão (isto é, se o lance dele supera o maior lan
 > **Onde entra o CTR (Taxa de Cliques) no *Payoff*?**  
 > Quando olhamos o ganho esperado do anunciante vencedor **antes de saber se o usuário vai clicar ou não no anúncio exibido**, basta multiplicar o lucro de 1 clique $(v_i - p)$ pela probabilidade de o usuário clicar no anúncio ($\text{CTR}$):
 > $$\text{Payoff Esperado por Exibição da Página} = \text{CTR} \times (v_i - p)$$
-> *(Por exemplo: se a Nike ganha R\$ 4,00 de lucro líquido quando alguém clica ($v_i - p = 4$) e a chance de o usuário clicar no anúncio é $\text{CTR} = 5\%$, cada vez que o anúncio aparece na tela a Nike ganha em média $5\% \times \text{R\$ } 4,00 = \text{R\$ } 0,20$. Como o $\text{CTR} > 0$ é apenas uma constante positiva multiplicando o lucro, maximizar $\text{CTR} \times (v_i - p)$ dá **exatamente o mesmo lance ótimo** que maximizar $(v_i - p)$!).*
+> *(Por exemplo: se a Nike ganha R\$ 4,00 de lucro líquido quando alguém clica ($v_i - p = 4$) e a chance de o usuário clicar no anúncio é $\text{CTR} = 5\%$, cada vez que o anúncio aparece na tela a Nike ganha em média $5\% \times 4{,}00 = 0{,}20$ (R\$ 0,20). Como o $\text{CTR} > 0$ é apenas uma constante positiva multiplicando o lucro, maximizar $\text{CTR} \times (v_i - p)$ dá **exatamente o mesmo lance ótimo** que maximizar $(v_i - p)$!).*
 
 ### 8.6. Artigos Científicos de Referência sobre o Caso (Formato ABNT)
 1. **EDELMAN, Benjamin; OSTROVSKY, Michael; SCHWARZ, Michael.** Internet advertising and the generalized second-price auction: Selling billions of dollars worth of keywords. **American Economic Review**, Nashville, v. 97, n. 1, p. 242–259, mar. 2007.  
@@ -720,7 +720,7 @@ O script simula $N_{\text{leilões}} = 10.000$ leilões sequenciais de um espaç
 
 1. **Etapa 1 — Sorteio das Valorações Privadas (O lance da "Natureza" de Harsanyi):**  
    Com semente fixa (`semente = 42`, garantindo total reprodutibilidade dos resultados), o gerador pseudoaleatório sorteia uma matriz de dimensão $10.000 \times 2$ com valorações independentes e identicamente distribuídas pela distribuição uniforme contínua em $[0,1]$:
-   $$v_{t,i} \stackrel{\text{i.i.d.}}{\sim} U[0,1], \qquad t \in \{1, \dots, 10.000\},\; i \in \{1, 2\}$$
+   $$v_{t,i} \stackrel{\text{i.i.d.}}{\sim} U[0,1], \qquad t \in \lbrace 1, \dots, 10.000\rbrace,\; i \in \lbrace 1, 2\rbrace$$
    Cada linha $t$ da matriz representa um leilão de anúncio (uma página carregada por um usuário) e cada coluna $i$ representa o valor privado verdadeiro daquele clique para o anunciante $i$.
 
 2. **Etapa 2 — Aplicação das Funções de Lance do Equilíbrio de Nash Bayesiano:**  
@@ -732,12 +732,12 @@ O script simula $N_{\text{leilões}} = 10.000$ leilões sequenciais de um espaç
 
 3. **Etapa 3 — Apuração do Vencedor e da Receita da Plataforma em Cada Leilão $t$:**  
    - **Receita no 1º Preço ($R_t^{(1)}$):** Vence o anunciante que submeteu o maior lance, e ele paga **o seu próprio lance** (o máximo da linha $t$ na matriz de lances de 1º preço):
-     $$R_t^{(1)} = \max_{i \in \{1,2\}} b_{t,i}^{\text{1º Preço}} = \frac{1}{2}\max\{v_{t,1},\, v_{t,2}\}$$
+     $$R_t^{(1)} = \max_{i \in \lbrace 1,2\rbrace} b_{t,i}^{\text{1º Preço}} = \frac{1}{2}\max\lbrace v_{t,1},\, v_{t,2}\rbrace$$
    - **Receita no 2º Preço ($R_t^{(2)}$):** Vence também o anunciante de maior valoração, mas ele paga **o segundo maior lance da rodada** (obtido ordenando os lances de cada linha com `np.sort` e extraindo a penúltima coluna `[:, -2]`):
-     $$R_t^{(2)} = \min\{v_{t,1},\, v_{t,2}\} \quad (\text{em geral, a estatística de ordem } v_{t,(n-1)})$$
+     $$R_t^{(2)} = \min\lbrace v_{t,1},\, v_{t,2}\rbrace  \quad (\text{em geral, a estatística de ordem } v_{t,(n-1)})$$
 
 4. **Etapa 4 — Convergência pela Lei dos Grandes Números (Média Acumulada):**  
-   Para cada instante $T \in \{1, 2, \dots, 10.000\}$, o programa calcula a **receita média acumulada** da plataforma até o $T$-ésimo leilão por meio da soma cumulativa vetorizada (`np.cumsum(receita) / indices`):
+   Para cada instante $T \in \lbrace 1, 2, \dots, 10.000\rbrace$, o programa calcula a **receita média acumulada** da plataforma até o $T$-ésimo leilão por meio da soma cumulativa vetorizada (`np.cumsum(receita) / indices`):
    $$\overline{R}_T^{(1)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(1)} \qquad \text{e} \qquad \overline{R}_T^{(2)} = \frac{1}{T}\sum_{t=1}^{T} R_t^{(2)}$$
    Pela Lei Forte dos Grandes Números e pelo **Teorema da Equivalência de Receita**, quando $T \to \infty$, ambas as médias acumuladas devem convergir para a mesma esperança matemática teórica:
    $$\mathbb{E}[R] = \frac{n-1}{n+1} = \frac{2-1}{2+1} = \frac{1}{3} \approx 0{,}3333$$
@@ -748,9 +748,9 @@ Ao executar o script (tempo de execução $\approx 0{,}02\text{ s}$), obtêm-se 
 
 | Métrica | Expressão | Valor Obtido |
 | :--- | :--- | :--- |
-| **Receita Teórica Esperada (RET)** | $\mathbb{E}[R] = \dfrac{n-1}{n+1} = \dfrac{1}{3}$ | **$0{,}3333$** |
-| **Receita Média Simulada — 1º Preço** | $\overline{R}_{10.000}^{(1)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} \max_i b_{t,i}^{(1)}$ | **$0{,}3339$** *(erro $< 0{,}0006$)* |
-| **Receita Média Simulada — 2º Preço (Vickrey)** | $\overline{R}_{10.000}^{(2)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} b_{t,(n-1)}^{(2)}$ | **$0{,}3323$** *(erro $< 0{,}0010$)* |
+| **Receita Teórica Esperada (RET)** | $\mathbb{E}[R] = \dfrac{n-1}{n+1} = \dfrac{1}{3}$ | $0{,}3333$ |
+| **Receita Média Simulada — 1º Preço** | $\overline{R}_{10.000}^{(1)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} \max_i b_{t,i}^{(1)}$ | $0{,}3339$ *(erro $< 0{,}0006$)* |
+| **Receita Média Simulada — 2º Preço (Vickrey)** | $\overline{R}_{10.000}^{(2)} = \dfrac{1}{10.000}\sum_{t=1}^{10.000} b_{t,(n-1)}^{(2)}$ | $0{,}3323$ *(erro $< 0{,}0010$)* |
 
 - **O que mostra o Painel (a) da figura:** Plota as funções de lance ótimo $b(v)$ em função da valoração privada $v_i \in [0,1]$. A reta azul ($b(v) = v$, inclinação $1$) representa o lance sincero no 2º Preço, enquanto a reta tracejada vermelha ($b(v) = \frac{1}{2}v$, inclinação $0{,}5$) representa o lance no 1º Preço. A área sombreada em rosa entre as duas retas destaca visualmente o **desconto estratégico (*Bid Shading* de $-50\%$)** que o anunciante aplica para proteger sua margem de lucro quando o leilão cobra o próprio lance.
 - **O que mostra o Painel (b) da figura:** Plota a evolução das médias acumuladas $\overline{R}_T^{(1)}$ (curva vermelha) e $\overline{R}_T^{(2)}$ (curva azul) do leilão $1$ até o leilão $10.000$. Observa-se que, embora nos primeiros leilões haja oscilação amostral, a partir de cerca de $1.500$ leilões as duas curvas se sobrepõem sobre a linha horizontal tracejada verde ($\mathbb{E}[R] = 1/3 \approx 0{,}3333$), demonstrando visualmente que o desconto de $50\%$ aplicado sobre o maior valor no 1º Preço compensa exatamente o fato de se cobrar $100\%$ do segundo maior valor no 2º Preço.
